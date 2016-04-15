@@ -8,6 +8,7 @@ import play.mvc.Result;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -36,10 +37,15 @@ public class HelloBot extends Controller {
     @BodyParser.Of(BodyParser.Json.class)
     public Result incoming() {
         KikRequest kikRequest = new KikRequest(request());
-        Logger.info("Incoming Request: " + request().host(), request().uri());
         Logger.info(kikRequest.getFrom() + ": " + kikRequest.getBody());
-        KikClient.postTextMessage(ws, kikRequest.getFrom(), kikRequest.getChatId(), greetings);
+        KikClient.postTextMessage(ws, kikRequest.getFrom(), kikRequest.getChatId(), getHelloMessage());
         return ok("Hello Bot incoming route.");
+    }
+
+    private String getHelloMessage() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(greetings.size());
+        return greetings.get(randomIndex);
     }
 
 }

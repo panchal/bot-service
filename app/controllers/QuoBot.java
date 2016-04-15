@@ -1,6 +1,5 @@
 package controllers;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import play.Logger;
 import play.libs.ws.WSClient;
 import play.mvc.BodyParser;
@@ -8,11 +7,6 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 import javax.inject.Inject;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,9 +35,8 @@ public class QuoBot extends Controller {
     @BodyParser.Of(BodyParser.Json.class)
     public Result incoming() {
         KikRequest kikRequest = new KikRequest(request());
-        Logger.info("Incoming Request: " + request().host(), request().uri());
         Logger.info(kikRequest.getFrom() + ": " + kikRequest.getBody());
-        KikClient.postTextMessage(ws, kikRequest.getFrom(), kikRequest.getChatId(), greetings);
+        KikClient.postTextMessage(ws, kikRequest.getFrom(), kikRequest.getChatId(), "Hello, I am QuoBot");
         return ok("Hello Bot incoming route.");
     }
 
