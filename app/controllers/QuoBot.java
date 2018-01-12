@@ -7,7 +7,6 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 import javax.inject.Inject;
-import java.util.List;
 
 /**
  * @author <a href="mailto:panchal@yahoo-inc.com">Deven Panchal</a>
@@ -16,15 +15,8 @@ public class QuoBot extends Controller {
 
     private static final String GREETINGS_FILE = "resources/greetings.txt";
 
-    private List<String> greetings;
-
     @Inject
     WSClient ws;
-
-    public QuoBot() {
-        ClassLoader classLoader = getClass().getClassLoader();
-        greetings = StreamUtils.loadResourceAsList(classLoader, GREETINGS_FILE);
-    }
 
     /**
      * An action that renders an HTML page with a welcome message.

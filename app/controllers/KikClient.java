@@ -20,8 +20,7 @@ public class KikClient {
         String kikUrl = getUrl(KIK_SCHEME, KIK_SERVER, kikPath);
         WSRequest kikRequest =  ws
                 .url(kikUrl)
-                .setHeader("Content-Type", "application/json")
-                .setAuth("devenpanchal", "ea4d0b90-d0ad-41d7-8bc6-216459249d84");
+                .setHeader("Content-Type", "application/json");
 
         kikRequest.post(getPostMessage(to, chatId, textMessage));
     }
